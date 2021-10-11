@@ -17,9 +17,9 @@ public class Driver {
 		JPanel panel = new JPanel();
 		JFrame frame = new JFrame();
 		JMenuBar menubar = new JMenuBar();
-		JMenu menu = new JMenu();
+		//JMenu menu = new JMenu();
 		
-		menu.
+		//menu.
 		
 		
 		frame.add(panel);
