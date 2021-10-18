@@ -1,7 +1,10 @@
 import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Font;
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -10,9 +13,11 @@ public class Framework extends JFrame implements ActionListener {
 	//Declaring stuff that needs to be globally accessible 
 	Button loginButton = new Button("Login");
 	Button createAccButton = new Button("Create Account");
-	Button backButton = new Button("Back Button");
+	Button backButton = new Button("Back");
+	Button backButton2 = new Button("Back");
 	JFrame mainFrame = new JFrame();
 	JFrame createAccFrame = new JFrame();
+	JFrame loginFrame = new JFrame();
 	
 	public void mainMenu() {	
 		// List of variables/items in the gui
@@ -106,15 +111,66 @@ public class Framework extends JFrame implements ActionListener {
 		createAccFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
+	public void createLogin() {
+	
+		loginFrame.setTitle("Login");
+		loginFrame.setBounds(100, 25, 400, 350);
+		loginFrame.setDefaultCloseOperation(3);
+		loginFrame.setLocationRelativeTo(null);
+		loginFrame.setResizable(false);
+		loginFrame.setFont(new Font("TimesRoman", Font.PLAIN, 14));
+		
+		backButton2.addActionListener(this);
+		FlowLayout fl = new FlowLayout(FlowLayout.CENTER,8,10);
+		loginFrame.setLayout(fl);
+		
+		JLabel labname = new JLabel("Account: ");
+		labname.setFont(new Font("TimesRoman", Font.PLAIN, 14));
+		loginFrame.add(labname);
+		
+		JTextField text_name = new JTextField();
+		Dimension dim1 = new Dimension(250,30);
+		text_name.setPreferredSize(dim1);
+		loginFrame.add(text_name);
+		
+		JLabel pwd = new JLabel("Password:");
+		pwd.setFont(new Font("TimesRoman", Font.PLAIN, 14));
+		loginFrame.add(pwd);
+		
+		JPasswordField text_password = new JPasswordField();
+		text_password.setPreferredSize(dim1);
+		loginFrame.add(text_password);
+		
+		JButton button1 = new JButton();
+		Dimension dim2 = new Dimension(100,30);
+		button1.setText("Sign in");
+		button1.setFont(new Font("TimesRoman", Font.PLAIN, 14));
+		button1.setSize(dim2);
+		loginFrame.add(button1);
+		JPanel back = new JPanel();
+		back.setLayout(new BorderLayout());
+		back.add(backButton2, "South");
+		loginFrame.add(back);
+		
+		loginFrame.setVisible(false);
+		loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
 	//Visibility methods for switching frames via buttons
 	private void mainFrameVisible() {
 		mainFrame.setVisible(true);
 		createAccFrame.setVisible(false);
+		loginFrame.setVisible(false);
 	}
-	
+	private void loginVisible() {
+		createAccFrame.setVisible(false);
+		mainFrame.setVisible(false);
+		loginFrame.setVisible(true);
+	}
 	private void createAccVisible() {
 		createAccFrame.setVisible(true);
 		mainFrame.setVisible(false);
+		loginFrame.setVisible(false);
 	}
 	
 	
@@ -125,7 +181,13 @@ public class Framework extends JFrame implements ActionListener {
 
 			createAccVisible();
 		}
+		if(e.getSource() == loginButton) {
+			loginVisible();
+		}
 		if(e.getSource() == backButton) {
+			mainFrameVisible();
+		}
+		if(e.getSource() == backButton2) {
 			mainFrameVisible();
 		}
 		
