@@ -28,6 +28,7 @@ public class Framework extends JFrame implements ActionListener {
 		JMenu menu = new JMenu("File");
 		JTextField searchBar = new JTextField();
 		JLabel searchLabel = new JLabel("Search: ");
+		
 		// Placeholder buttons for apps
 		Button b1 = new Button("App 1");
 		Button b2 = new Button("App 2");
@@ -162,11 +163,13 @@ public class Framework extends JFrame implements ActionListener {
 		createAccFrame.setVisible(false);
 		loginFrame.setVisible(false);
 	}
+	
 	private void loginVisible() {
 		createAccFrame.setVisible(false);
 		mainFrame.setVisible(false);
 		loginFrame.setVisible(true);
 	}
+	
 	private void createAccVisible() {
 		createAccFrame.setVisible(true);
 		mainFrame.setVisible(false);
@@ -177,20 +180,14 @@ public class Framework extends JFrame implements ActionListener {
 	//Action listener
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == createAccButton) {
-
+		if(e.getSource() == createAccButton)
 			createAccVisible();
-		}
-		if(e.getSource() == loginButton) {
+		if(e.getSource() == loginButton)
 			loginVisible();
-		}
-		if(e.getSource() == backButton) {
+		if(e.getSource() == backButton)
 			mainFrameVisible();
-		}
-		if(e.getSource() == backButton2) {
+		if(e.getSource() == backButton2)
 			mainFrameVisible();
-		}
-		
 	}
 
 }

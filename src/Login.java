@@ -54,6 +54,7 @@ public class Login {
 				
 				// Read information from login file
 				file = new File("Logins.txt");
+				
 				try {
 					Scanner fin = new Scanner(file);
 					String userTry = input.substring(0, input.charAt(' '));
@@ -98,5 +99,4 @@ public class Login {
 		
 		
 	} // end of main
-	
 }
