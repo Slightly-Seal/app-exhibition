@@ -1,10 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.Font;
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -13,31 +10,41 @@ public class Framework extends JFrame implements ActionListener {
 	//Declaring stuff that needs to be globally accessible 
 	Button loginButton = new Button("Login");
 	Button createAccButton = new Button("Create Account");
-	Button backButton = new Button("Back");
-	Button backButton2 = new Button("Back");
 	JFrame mainFrame = new JFrame();
-	JFrame createAccFrame = new JFrame();
-	JFrame loginFrame = new JFrame();
+	JPanel panel = new JPanel();
+	CreateAccount createAccount = new CreateAccount();
+	Login login = new Login();
 	
-	public void mainMenu() {	
+	// Placeholder buttons for apps
+	Button b1 = new Button("App 1");
+	Button b2 = new Button("App 2");
+	Button b3 = new Button("App 3");
+	Button b4 = new Button("App 4");
+	Button b5 = new Button("App 5");
+	Button b6 = new Button("App 6");
+	Button b7 = new Button("App 7");
+	
+	Framework() {	
 		// List of variables/items in the gui
-		JPanel panel = new JPanel();
+		
 		JPanel accLoginPanel = new JPanel();
 		JPanel innerP = new JPanel();
-		JMenuBar menubar = new JMenuBar();
-		JMenu menu = new JMenu("File");
+		//Unused?
+		//JMenuBar menubar = new JMenuBar();
+		//JMenu menu = new JMenu("File");
 		JTextField searchBar = new JTextField();
 		JLabel searchLabel = new JLabel("Search: ");
-		
-		// Placeholder buttons for apps
-		Button b1 = new Button("App 1");
-		Button b2 = new Button("App 2");
-		Button b3 = new Button("App 3");
-		Button b4 = new Button("App 4");
-		
+				
 		//Adding action listeners for Login/Create Account
 		loginButton.addActionListener(this);
 		createAccButton.addActionListener(this);
+		b1.addActionListener(this);
+		b2.addActionListener(this);
+		b3.addActionListener(this);
+		b4.addActionListener(this);
+		b5.addActionListener(this);
+		b6.addActionListener(this);
+		b7.addActionListener(this);
 		
 		// General Setup for layout
 		mainFrame.setBounds(100, 25, 400, 350);
@@ -59,9 +66,9 @@ public class Framework extends JFrame implements ActionListener {
 		innerP.add(b2);
 		innerP.add(b3);
 		innerP.add(b4);
-		innerP.add(new Button("App 5"));
-		innerP.add(new Button("App 6"));
-		innerP.add(new Button("App 7"));
+		innerP.add(b5);
+		innerP.add(b6);
+		innerP.add(b7);
 		
 		// Making visible, and final adds to the frame
 		innerP.setVisible(true);
@@ -70,110 +77,32 @@ public class Framework extends JFrame implements ActionListener {
 		mainFrame.add(panel);
 		mainFrame.setVisible(true);
 		
-		
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	//Creating the Create Acc Page
-	public void createAccMenu() {
-		//Create elements that appear in panels
-		JPanel createAccPanel = new JPanel();
-		JPanel centerPanel = new JPanel();
-		
-		JLabel emailLabel = new JLabel("Email: ");
-		JLabel usernameLabel = new JLabel("Username: ");
-		JLabel passwordLabel = new JLabel("Passsword: ");
-		
-		JTextField email = new JTextField();
-		JTextField username = new JTextField();
-		JTextField password = new JTextField();
-		
-		backButton.addActionListener(this);
-		
-		//Setting up the panels
-		createAccFrame.setBounds(100, 25, 400, 350);
-		createAccPanel.setLayout(new BorderLayout());
-		centerPanel.setLayout(new GridLayout(3, 2, 5, 5));
-		centerPanel.add(emailLabel);
-		centerPanel.add(email);
-		centerPanel.add(usernameLabel);
-		centerPanel.add(username);
-		centerPanel.add(passwordLabel);
-		centerPanel.add(password);
-		createAccPanel.add(centerPanel, "Center");
-		createAccPanel.add(backButton, "South");
-		
-		// Making visible, and final adds to the frame. Starts with visibility false
-		createAccPanel.setVisible(true);
-		centerPanel.setVisible(true);
-		createAccFrame.add(createAccPanel);
-		createAccFrame.setVisible(false);
-		
-		createAccFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
 	
-	public void createLogin() {
-	
-		loginFrame.setTitle("Login");
-		loginFrame.setBounds(100, 25, 400, 350);
-		loginFrame.setDefaultCloseOperation(3);
-		loginFrame.setLocationRelativeTo(null);
-		loginFrame.setResizable(false);
-		loginFrame.setFont(new Font("TimesRoman", Font.PLAIN, 14));
-		
-		backButton2.addActionListener(this);
-		FlowLayout fl = new FlowLayout(FlowLayout.CENTER,8,10);
-		loginFrame.setLayout(fl);
-		
-		JLabel labname = new JLabel("Account: ");
-		labname.setFont(new Font("TimesRoman", Font.PLAIN, 14));
-		loginFrame.add(labname);
-		
-		JTextField text_name = new JTextField();
-		Dimension dim1 = new Dimension(250,30);
-		text_name.setPreferredSize(dim1);
-		loginFrame.add(text_name);
-		
-		JLabel pwd = new JLabel("Password:");
-		pwd.setFont(new Font("TimesRoman", Font.PLAIN, 14));
-		loginFrame.add(pwd);
-		
-		JPasswordField text_password = new JPasswordField();
-		text_password.setPreferredSize(dim1);
-		loginFrame.add(text_password);
-		
-		JButton button1 = new JButton();
-		Dimension dim2 = new Dimension(100,30);
-		button1.setText("Sign in");
-		button1.setFont(new Font("TimesRoman", Font.PLAIN, 14));
-		button1.setSize(dim2);
-		loginFrame.add(button1);
-		JPanel back = new JPanel();
-		back.setLayout(new BorderLayout());
-		back.add(backButton2, "South");
-		loginFrame.add(back);
-		
-		loginFrame.setVisible(false);
-		loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
 	
 	//Visibility methods for switching frames via buttons
 	private void mainFrameVisible() {
-		mainFrame.setVisible(true);
-		createAccFrame.setVisible(false);
-		loginFrame.setVisible(false);
+		createAccount.setActive(false);
+		login.setActive(false);
 	}
 	
 	private void loginVisible() {
-		createAccFrame.setVisible(false);
-		mainFrame.setVisible(false);
-		loginFrame.setVisible(true);
+		createAccount.setActive(false);
+		login.setActive(true);
 	}
 	
 	private void createAccVisible() {
-		createAccFrame.setVisible(true);
-		mainFrame.setVisible(false);
-		loginFrame.setVisible(false);
+		createAccount.setActive(true);
+		login.setActive(false);
+	}
+	
+	private void createCatalog(int index) {
+		CatalogInfo newCatalog = new CatalogInfo(index);
+		newCatalog.setActive(true);
+		createAccount.setActive(false);
+		login.setActive(false);
 	}
 	
 	
@@ -184,10 +113,20 @@ public class Framework extends JFrame implements ActionListener {
 			createAccVisible();
 		if(e.getSource() == loginButton)
 			loginVisible();
-		if(e.getSource() == backButton)
-			mainFrameVisible();
-		if(e.getSource() == backButton2)
-			mainFrameVisible();
+		if(e.getSource() == b1)
+			createCatalog(1);
+		if(e.getSource() == b2)
+			createCatalog(2);
+		if(e.getSource() == b3)
+			createCatalog(3);
+		if(e.getSource() == b4)
+			createCatalog(4);
+		if(e.getSource() == b5)
+			createCatalog(5);
+		if(e.getSource() == b6)
+			createCatalog(6);
+		if(e.getSource() == b7)
+			createCatalog(7);
 	}
 
 }

@@ -5,11 +5,10 @@
  * This class builds and works the login screen
  * 
  */
-
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import javax.swing.JButton;
@@ -18,85 +17,90 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Login {
+public class Login implements ActionListener{
 	
-	// Variables
-	static JFrame frame;
-	static JPanel panel;
+	//Frame + Panel
+	JFrame frame;
+	JPanel panel;
 	
-	// Text based variables
-	static JTextField userEnter;
-	static JTextField passEnter;
-	static JLabel label;
-	static JButton logButton;
-	static File file;
+	//Variables
+	JTextField userEnter;
+	JTextField passEnter;
+	JLabel label;
+	JButton logButton;
+	File file;
 	
-	
-	public static void main(String[] args) {
-		
-		// Initalizing variables
+	Login(){
 		frame = new JFrame("Login Screen");
 		panel = new JPanel();
 		userEnter = new JTextField(20);
 		passEnter = new JTextField(15);
 		label = new JLabel("");
+		JLabel label2 = new JLabel("Username:");
+		JLabel label3 = new JLabel("       ");
+		JLabel label4 = new JLabel("Password:");
 		logButton = new JButton("Login");
-		
-		// Basic setup and organizing
-		frame.setSize(400, 200);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		logButton.setSize(100, 50);
-		
-		// Button magic
-		logButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String input = userEnter.getText() + "/" + passEnter.getText();
-				
-				// Read information from login file
-				file = new File("Logins.txt");
-				
-				try {
-					Scanner fin = new Scanner(file);
-					String userTry = input.substring(0, input.charAt(' '));
-					String passTry = input.substring(input.charAt(' ') + 1);
-					
-					// Scan file for matching username, report unmade account if not found
-					while (fin.hasNextLine()) {
-						String saved = fin.nextLine();
-						// If username matches login file
-						if (saved.substring(saved.charAt(' ')).equals(userTry)) {
-							// if pass matches login file line
-							if (saved.substring(saved.charAt(' ') + 1).equals(passTry)) {
-								label.setText("Logged in successfully! Welcome.");
-							}
-							else {
-								passEnter.setText("");
-								label.setText("Given password does not match what is on file");
-							}
-						}
-					}
-					fin.close();
-				}
-				catch (Exception FileNotFound) {
-					label.setText("Login Information unattainable");
-				}
-				userEnter.setText("");
-				passEnter.setText("");
-				label.setText("No account with such username");
-				
-			}
-		});
-		
+		logButton.addActionListener(this);
+		frame.setSize(400, 200);
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Adding to panel, then frame 
+		panel.add(label2);
 		panel.add(userEnter);
+		panel.add(label3);
+		panel.add(label4);
 		panel.add(passEnter);
 		panel.add(logButton);
 		panel.add(label);
 		
 		panel.setVisible(true);
 		frame.add(panel);
-		frame.setVisible(true);
+		frame.setVisible(false);
+	}
+	
+	public void setActive(boolean value) {
+		frame.setVisible(value);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String input = userEnter.getText() + "\\" + passEnter.getText();
+		//System.out.println(input);
+		
+		Scanner scanner = null;
+		
+		String userTry = input.substring(0, input.indexOf("\\"));
+		String passTry = input.substring(input.indexOf("\\") + 1);
+
+		
+		try {
+			scanner = new Scanner(new File("Login.txt"));
+		} catch (FileNotFoundException e1) {
+			System.out.print("Cannot Access Username/Passwords");
+		}
+		while (scanner.hasNextLine()) {
+		   String line = scanner.nextLine();
+		   //System.out.println(line.substring(0, line.indexOf("\\")).equals(userTry));
+		   //System.out.println(line.substring(line.indexOf("\\") + 1).equals(passTry));
+		   
+		   if (line.substring(0, line.indexOf("\\")).equals(userTry)) {
+				// if pass matches login file line
+				if (line.substring(line.indexOf("\\") + 1).equals(passTry)) {
+					label.setText("Logged in successfully! Welcome.");
+				}
+				else {
+					passEnter.setText("");
+					label.setText("Given password does not match what is on file");
+				}
+			}
+		   else {
+				userEnter.setText("");
+				passEnter.setText("");
+				label.setText("No account with such username");
+		   }
+		}
 		
 		
-	} // end of main
+		
+	}
 }

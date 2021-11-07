@@ -23,15 +23,16 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 */
+
 public class Driver{
 	
 	
 	
 	public static void main(String[] args) {
 		Framework frames = new Framework();
-		frames.mainMenu();
-		frames.createAccMenu();
-		frames.createLogin();
+		//CreateAccount createAccount = new CreateAccount();
+		//Login login = new Login();
+		
 	}
 
 	
