@@ -1,5 +1,5 @@
 /** 
- * Author: Dakota Henderson
+ * Author: Dakota Henderson and James Martin
  * Date: 10/11/21
  * updated: 10/15/21
  * 
@@ -25,13 +25,19 @@ import javax.swing.JTextField;
 */
 
 public class Driver{
-	
-	
-	
+		
 	public static void main(String[] args) {
 		Framework frames = new Framework();
-		//CreateAccount createAccount = new CreateAccount();
-		//Login login = new Login();
+		CreateAccount createAccount = new CreateAccount();
+		LoginU login = new LoginU();
+		UserSubmissions userSubmissions = new UserSubmissions();
+		
+		frames.createAccount = createAccount;
+		frames.login = login;
+		frames.userSubmissions = userSubmissions;
+		
+		login.frames = frames;
+		
 		
 	}
 

@@ -8,41 +8,43 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.swing.*;
 
-public class CreateAccount implements ActionListener{
+public class UserSubmissions implements ActionListener{
 
 	//Frame + Panel
 	JFrame frame;
 	JPanel panel;
 	
 	// Text based variables
-	JTextField userEnter;
-	JTextField passEnter;
+	JTextField submissionTitle;
+	JTextArea submissionDescription;
 	JLabel label;
 	JButton createButton;
 	File file;
 	
-	CreateAccount() {
-		frame = new JFrame("Create Account Screen");
+	UserSubmissions() {
+		frame = new JFrame("Submit New App");
 		panel = new JPanel();
-		userEnter = new JTextField(20);
-		passEnter = new JTextField(15);
+		submissionTitle = new JTextField(30);
+		submissionDescription = new JTextArea(10,30);
+		submissionDescription.setLineWrap(true);
+		submissionDescription.setWrapStyleWord(true);
+		
 		label = new JLabel("");
-		JLabel label2 = new JLabel("Username:");
-		JLabel label3 = new JLabel("      ");
-		JLabel label4 = new JLabel("Password:");
-		createButton = new JButton("Create New Account");
+		JLabel label2 = new JLabel("Title:");
+		JLabel label3 = new JLabel("    ");
+		JLabel label4 = new JLabel("Description:");
+		createButton = new JButton("Submit Application");
 		createButton.addActionListener(this);
 		createButton.setSize(100, 50);
-		frame.setSize(400, 200);
+		frame.setSize(400, 340);
 		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		file = new File("Login.txt");
+		file = new File("Submissions.txt");
 		if (!file.exists()) {
 			try {
 				file.createNewFile();
@@ -52,12 +54,13 @@ public class CreateAccount implements ActionListener{
 			}
 		}
 		
+		
 		// Adding to panel, then frame 
 		panel.add(label2);
-		panel.add(userEnter);
+		panel.add(submissionTitle);
 		panel.add(label3);
 		panel.add(label4);
-		panel.add(passEnter);
+		panel.add(submissionDescription);
 		panel.add(createButton);
 		panel.add(label);
 		panel.setVisible(true);
@@ -72,11 +75,11 @@ public class CreateAccount implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// Checks if there is a string in the text fields
-		if (!(userEnter.getText().length() > 0)) {
-			label.setText("Insert user name for new account");
+		if (!(submissionTitle.getText().length() > 0)) {
+			label.setText("Insert Title for Submission");
 		}
-		if (!(passEnter.getText().length() > 0)) {
-			label.setText("Insert password for new account");
+		if (!(submissionDescription.getText().length() > 0)) {
+			label.setText("Insert Description for Submission");
 		}
 		else {
 			PrintWriter fout = null;
@@ -85,9 +88,10 @@ public class CreateAccount implements ActionListener{
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			fout.printf("\n" +userEnter.getText() + "\\" + passEnter.getText() + "\"False");
+			fout.printf("\n" +submissionTitle.getText() + "\\" + submissionDescription.getText());
 			fout.close();
-			label.setText("Account Created!");
+			label.setText("Application Submitted!");
+			frame.setVisible(false);
 		}
 	}
 }
