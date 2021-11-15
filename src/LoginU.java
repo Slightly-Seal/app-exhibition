@@ -1,10 +1,10 @@
-/*
- * Author: Dakota Henderson
- * Date: 10/24/21
- * 
- * This class builds and works the login screen
- * 
- */
+/**
+* LoginU is used to display information required for the user to log in.
+* It scans from "Login.txt"
+* @author Dakota Henderson
+* @author James Martin
+*/
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -17,7 +17,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Login implements ActionListener{
+/**
+* Displays information related to logging into an existing account
+*/
+public class LoginU implements ActionListener{
 	
 	//Frame + Panel
 	JFrame frame;
@@ -30,7 +33,14 @@ public class Login implements ActionListener{
 	JButton logButton;
 	File file;
 	
-	Login(){
+	public Framework frames;
+	
+	/**
+	 * Constructor for LoginU. Sets up all visual elements
+	 * of the page, as well as two text fields for inputting the 
+	 * user's login-information.
+	 */
+	LoginU(){
 		frame = new JFrame("Login Screen");
 		panel = new JPanel();
 		userEnter = new JTextField(20);
@@ -58,10 +68,20 @@ public class Login implements ActionListener{
 		frame.setVisible(false);
 	}
 	
+	/**
+	* Used to turn the frame visible/invisible.
+	* @param boolean, true sets it visible, false sets it invisible.
+	*/
 	public void setActive(boolean value) {
 		frame.setVisible(value);
 	}
 	
+	/**
+	* Override from ActionListener.
+	* Scans "Login.txt" to verify that the information the user inputted is 
+	* from an existing account.
+	* @param Action event e that's used to verify which button is being pressed.
+	*/
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String input = userEnter.getText() + "\\" + passEnter.getText();
@@ -85,8 +105,17 @@ public class Login implements ActionListener{
 		   
 		   if (line.substring(0, line.indexOf("\\")).equals(userTry)) {
 				// if pass matches login file line
-				if (line.substring(line.indexOf("\\") + 1).equals(passTry)) {
+				if (line.substring(line.indexOf("\\") + 1, line.indexOf("\"")).equals(passTry)) {
 					label.setText("Logged in successfully! Welcome.");
+					if(line.substring(line.indexOf("\"") +1).equals("True")) {
+						frames.isAdmin = true;
+					}
+					else {
+						frames.isAdmin = false;
+					}
+					frames.isLoggedOn = true;
+					frames.LoginButton();
+					frame.setVisible(false);
 				}
 				else {
 					passEnter.setText("");
@@ -99,7 +128,6 @@ public class Login implements ActionListener{
 				label.setText("No account with such username");
 		   }
 		}
-		
 		
 		
 	}

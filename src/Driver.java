@@ -1,37 +1,34 @@
-/** 
- * Author: Dakota Henderson
- * Date: 10/11/21
- * updated: 10/15/21
- * 
- * Is the first instance of App Exhibition. The main job is to get a 
- * window open with a closeable menu.
- */
-
-/*
-import java.awt.BorderLayout;
-import java.awt.Button;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+/**
+* Driver class is what runs everything, 
+* the initial framework and additional 
+* classes are assigned here.
+* @author Dakota Henderson
+* @author James Martin
 */
 
+
+
 public class Driver{
+		
 	
-	
-	
+	/**
+	 * Main method
+	 * Creates required classes.
+	 * Assigns class variables to certain classes.
+	 * that require them in order to maintain integrity.
+	 */
 	public static void main(String[] args) {
 		Framework frames = new Framework();
-		//CreateAccount createAccount = new CreateAccount();
-		//Login login = new Login();
+		CreateAccount createAccount = new CreateAccount();
+		LoginU login = new LoginU();
+		UserSubmissions userSubmissions = new UserSubmissions();
+		
+		frames.createAccount = createAccount;
+		frames.login = login;
+		frames.userSubmissions = userSubmissions;
+		
+		login.frames = frames;
+		
 		
 	}
 
