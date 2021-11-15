@@ -1,10 +1,12 @@
-/*
- * Authors: Dakota Henderson and James Martin
- * Date: 10/24/21
- * 
- * This class builds and works the login screen
- * 
- */
+/**
+* Admin class is what appears when an admin is reviewing user submissions.
+* Pressing on one of the buttons generated opens up the CatalogInfoAdmin with 
+* information about that specific app.
+* Scans "Submissions.txt" and "Substitute.txt"
+* 
+* @author James Martin
+* 
+*/
 import java.awt.Button;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -18,6 +20,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+* Displays information for Admin that lists 
+* all user submitted application ideas
+*/
 public class Admin implements ActionListener{
 	
 	//Frame + Panel
@@ -37,6 +43,13 @@ public class Admin implements ActionListener{
 	static public int numberOfApps = 7;
 	
 	boolean scanCheck = false;
+	
+	/**
+	* This is the constructor for the admin page, it's responsible for setting the frame,
+	* panel, textfields, and scanners. Compares two files via scanners, one with the User Submissions and
+	* one with already implemented Catalog elements, comparing the two. If there's a submission that's in
+	* both .txt files, then it's ignored when creating buttons.
+	*/
 	Admin(){
 		frame = new JFrame("User Submissions");
 		panel = new JPanel();
@@ -94,13 +107,26 @@ public class Admin implements ActionListener{
 		frame.setVisible(false);
 	}
 	
+	/**
+	* Used to turn the frame visible/invisible.
+	* @param boolean, true sets it visible, false sets it invisible.
+	*/
 	public void setActive(boolean value) {
 		frame.setVisible(value);
 	}
 	
+	/**
+	* Used to remove a specific button from the panel.
+	* @param button that is to be removed.
+	*/
 	public void removeItem(Button button) {
 		panel.remove(button);
 	}
+	
+	/**
+	* Override from ActionListener
+	* @param Action event e that's used to verify which button is being pressed.
+	*/
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		

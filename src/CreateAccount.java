@@ -1,10 +1,10 @@
-/* 
- * Authors: Dakota Henderson and James Martin
- * Date: 10/24/21
- * 
- * Builds and runs the Create Account page
- */
-
+/**
+* CreateAccount is used to display an interface that allows the user
+* to create an account on the application.
+* It prints to "Login.txt"
+* @author Dakota Henderson
+* @author James Martin
+*/
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -15,6 +15,9 @@ import java.io.PrintWriter;
 
 import javax.swing.*;
 
+/**
+* Displays information related to creating an account
+*/
 public class CreateAccount implements ActionListener{
 
 	//Frame + Panel
@@ -28,6 +31,11 @@ public class CreateAccount implements ActionListener{
 	JButton createButton;
 	File file;
 	
+	/**
+	 * Constructor for CreateAccount, sets up all visual elements required for
+	 * for the user to create an account.
+	 * If there is no "Login.txt" file, it creates one. 
+	 */
 	CreateAccount() {
 		frame = new JFrame("Create Account Screen");
 		panel = new JPanel();
@@ -65,10 +73,21 @@ public class CreateAccount implements ActionListener{
 		frame.setVisible(false);
 	}
 	
+	/**
+	* Used to turn the frame visible/invisible.
+	* @param boolean, true sets it visible, false sets it invisible.
+	*/
 	public void setActive(boolean value) {
 		frame.setVisible(value);
 	}
 
+	/**
+	* Override from ActionListener.
+	* Check to see if there's text in the username and password fields.
+	* If there is, then it prints the information to "Login.txt".
+	* Feedback is given to user via labels. 
+	* @param Action event e that's used to verify which button is being pressed.
+	*/
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// Checks if there is a string in the text fields

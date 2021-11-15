@@ -1,4 +1,10 @@
-//Authors: James Martin
+/**
+* CatalogInfoAdmin displays the information of a specific application that
+* a user submitted.
+* Scans both "Substitute.txt" and "Submissions.txt"
+* Prints to "Catalog.txt"
+* @author James Martin
+*/
 import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.GridLayout;
@@ -15,6 +21,10 @@ import java.util.Scanner;
 
 import javax.swing.*;
 
+/**
+* Displays selected application's information 
+* Allows Admin to Accept or Reject Submission
+*/
 public class CatalogInfoAdmin implements ActionListener{
 	//Frame + Panel
 	JFrame frame;
@@ -34,6 +44,11 @@ public class CatalogInfoAdmin implements ActionListener{
     
 	boolean scanCheck = false;
 	
+	/**
+	 * Used to display the information of a user submitted app.
+	 * @param title, is the title of the user submission. Used for the frame label and to verify a scanned line in order to display the correct information.
+	 * @param button, is used to remove the button from the Admin class, making it impossible to open a second CatalogInfoAdmin class. 
+	 */
 	CatalogInfoAdmin(String title, Button button){
 		sourceButton = button;
 		frame = new JFrame("Submission Item: " + title);
@@ -84,10 +99,21 @@ public class CatalogInfoAdmin implements ActionListener{
 		frame.setVisible(false);
 		}
 	
+	/**
+	* Used to turn the frame visible/invisible
+	* @param boolean, true sets it visible, false sets it invisible.
+	*/
 	public void setActive(boolean value) {
 		frame.setVisible(value);
 	}
 
+	/**
+	* Override from ActionListener.
+	* If the Admin accepts a submitted application, it will appear in the Framework class and 
+	* be added to Catalog.txt and Substitute.txt. If it is rejected, it will be added to the
+	* Substitute.txt.
+	* @param Action event e that's used to verify which button is being pressed.
+	*/
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == confirmButton) {  
@@ -158,8 +184,59 @@ public class CatalogInfoAdmin implements ActionListener{
 			parent.removeItem(sourceButton);
 			frame.setVisible(false);
 			frames.submissionCheck();
+			frames.isSorted = false;
+			frames.alphaSort.setLabel("Sort By Name");
 		}
 		if(e.getSource() == denyButton) {
+			PrintWriter pw = null;
+			try {
+				pw = new PrintWriter(new FileWriter(file, true));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+	          
+	        // BufferedReader object for input.txt
+	        BufferedReader br1 = null;
+			try {
+				br1 = new BufferedReader(new FileReader(file3));
+			} catch (FileNotFoundException e2) {
+				e2.printStackTrace();
+			}
+	          
+	        String line1 = null;
+			try {
+				line1 = br1.readLine();
+			} catch (IOException e2) {
+				e2.printStackTrace();
+			}
+	          
+	        // loop for each line of input.txt
+	        while(line1 != null)
+	        {   
+	            String line2 = titleLabel.getText() + "\\" + descLabel.getText();
+	              
+	            // loop for each line of delete.txt
+	            if(line1.equals(line2))
+                {
+	            	pw.printf("\n" +line1);
+                }
+	                           
+	            try {
+					line1 = br1.readLine();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+	              
+	        }
+	          
+	        // closing resources
+	        try {
+				br1.close();
+			} catch (IOException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+	        pw.close();
 			parent.removeItem(sourceButton);
 			frame.setVisible(false);
 		}

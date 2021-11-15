@@ -1,10 +1,13 @@
-/* 
- * Authors: Dakota Henderson and James Martin
- * Date: 10/24/21
- * 
- * Builds and runs the Create Account page
- */
-
+/**
+* UserSubmssions class sets up the panel/frame that appears when having a user
+* submit a potential application idea.
+* Users must fill out a title and description for the application before
+* it is able to be submitted. 
+* Information is recorded in Submissions.txt file. 
+* 
+* @author James Martin
+* 
+*/
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -14,6 +17,10 @@ import java.io.PrintWriter;
 
 import javax.swing.*;
 
+/**
+* Displays information that allows logged-in user to 
+* submit an application for the catalog
+*/
 public class UserSubmissions implements ActionListener{
 
 	//Frame + Panel
@@ -27,6 +34,12 @@ public class UserSubmissions implements ActionListener{
 	JButton createButton;
 	File file;
 	
+	/**
+	* This is the constructor for the user submission page.
+	* This is responsible for setting upthe Frame, Panel, and formatting 
+	* of the page. Also creates a "Submissions.txt" if there is not one 
+	* available to read.
+	*/
 	UserSubmissions() {
 		frame = new JFrame("Submit New App");
 		panel = new JPanel();
@@ -68,10 +81,18 @@ public class UserSubmissions implements ActionListener{
 		frame.setVisible(false);
 	}
 	
+	/**
+	* Used to turn the frame visible/invisible
+	* @param boolean, true sets it visible, false sets it invisible
+	*/
 	public void setActive(boolean value) {
 		frame.setVisible(value);
 	}
 
+	/**
+	* Override from ActionListener
+	* @param Action event e that's used to verify which button is being pressed
+	*/
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// Checks if there is a string in the text fields
