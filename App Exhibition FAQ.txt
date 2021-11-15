@@ -1,0 +1,26 @@
+﻿Q: Do you need to create an account or login to use the app?
+A: You do not need to create an account or login to use App Exhibition. Having an account allows you to write comments and submit requests for apps that have not been added to App Exhibition
+
+
+Q: How do I use App Exhibition?
+A: On the screen, there is a grid of buttons with application names. You hit a button and the information for that application will appear in a new window.
+
+
+Q: How do I create an account?
+A: In the upper corner of the application, there is a button labeled “Create Account”. You can hit that button and will be taken to the Create Account page.
+
+
+Q: How do I log in to my account?
+A: In the upper corner of the application, there is a button labeled “Login”. When you hit that button, you will be directed to the login page. Logging in allows you to write comments and request for apps to be added to App Exhibition.
+
+
+Q: What does a moderator do?
+A: A moderator can read and delete certain comments from apps. This is to ensure that our application is a safe and welcoming environment to everyone.
+
+
+Q: What does an administrator do?
+A: A moderator reviews the requests for applications and accepts or rejects them.
+
+
+Q: How do I submit a request for apps?
+A: On the bottom of the application, there will be a button to “Create Submission”. You may then enter the information to request an application to be added. If you do not see the button, you do need to be logged in to request an app, so either login to App Exhibition, or refresh the application.
