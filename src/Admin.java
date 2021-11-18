@@ -8,6 +8,7 @@
 * 
 */
 import java.awt.Button;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -58,7 +59,7 @@ public class Admin implements ActionListener{
 		label = new JLabel("");
 		frame.setSize(400, 400);
 		panel.setLayout(new GridLayout(10, 2, 5, 5));
-		
+		panel.setBackground(new Color(102, 178, 255));
 		try {
 			scanner = new Scanner(new File("Submissions.txt"));
 		} catch (FileNotFoundException e1) {
@@ -92,6 +93,7 @@ public class Admin implements ActionListener{
 				   String title = line.substring(0, line.indexOf("\\"));
 				   itemButton.setLabel(title);
 				   itemButton.addActionListener(this);
+				   itemButton.setBackground(new Color(255, 255, 255));
 				   panel.add(itemButton); 
 			   }
 		   

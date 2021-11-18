@@ -7,6 +7,7 @@
 */
 import java.awt.BorderLayout;
 import java.awt.Button;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -54,11 +55,14 @@ public class CatalogInfoAdmin implements ActionListener{
 		frame = new JFrame("Submission Item: " + title);
 		panel = new JPanel();
 		panel.setLayout(new BorderLayout());
+		panel.setBackground(new Color(102, 178, 255));
 		JPanel bottomP = new JPanel();
 		bottomP.setLayout(new GridLayout(1, 2, 5, 5));
 		frame.setSize(400, 250);
 		confirmButton.addActionListener(this);
 		denyButton.addActionListener(this);
+		confirmButton.setBackground(new Color(255, 255, 255));
+		denyButton.setBackground(new Color(255, 255, 255));
 		if (!file.exists()) {
 			try {
 				file.createNewFile();

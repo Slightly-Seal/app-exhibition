@@ -5,6 +5,7 @@
 * @author James Martin
 */
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -52,7 +53,9 @@ public class LoginU implements ActionListener{
 		logButton = new JButton("Login");
 		logButton.setSize(100, 50);
 		logButton.addActionListener(this);
+		logButton.setBackground(new Color(255, 255, 255));
 		frame.setSize(400, 200);
+		panel.setBackground(new Color(102, 178, 255));
 		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Adding to panel, then frame 
 		panel.add(label2);
