@@ -9,11 +9,9 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import javax.swing.*;
 
 /**
@@ -21,16 +19,14 @@ import javax.swing.*;
 */
 public class CreateAccount implements ActionListener{
 
-	//Frame + Panel
-	JFrame frame;
-	JPanel panel;
-	
-	// Text based variables
-	JTextField userEnter;
-	JTextField passEnter;
-	JLabel label;
-	JButton createButton;
-	File file;
+	// Instance variables.
+	public static JFrame frame;
+	public static JPanel panel;
+	public static JTextField userEnter;
+	public static JTextField passEnter;
+	public static JLabel label;
+	public static JButton createButton;
+	public static File file;
 	
 	/**
 	 * Constructor for CreateAccount, sets up all visual elements required for
@@ -86,30 +82,95 @@ public class CreateAccount implements ActionListener{
 
 	/**
 	* Override from ActionListener.
-	* Check to see if there's text in the username and password fields.
+	* Check to see if there's text in the user and password fields.
 	* If there is, then it prints the information to "Login.txt".
 	* Feedback is given to user via labels. 
 	* @param Action event e that's used to verify which button is being pressed.
 	*/
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		processAccountCreation();
+	}
+	
+	public void processAccountCreation() {
 		// Checks if there is a string in the text fields
 		if (!(userEnter.getText().length() > 0)) {
-			label.setText("Insert user name for new account");
+			label.setText("Enter username.");
+			userEnter.setText("");
+			passEnter.setText("");
+			return;
 		}
 		if (!(passEnter.getText().length() > 0)) {
-			label.setText("Insert password for new account");
-		}
-		else {
+			label.setText("Enter password.");
+			userEnter.setText("");
+			passEnter.setText("");
+			return;
+		} else {
 			PrintWriter fout = null;
 			try {
 				fout = new PrintWriter(new FileWriter(file, true));
 			} catch (IOException e1) {
-				e1.printStackTrace();
+					e1.printStackTrace();
 			}
 			fout.printf("\n" +userEnter.getText() + "\\" + passEnter.getText() + "\"False");
 			fout.close();
 			label.setText("Account Created!");
 		}
+	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		CreateAccount.frame = frame;
+	}
+
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	public void setPanel(JPanel panel) {
+		CreateAccount.panel = panel;
+	}
+
+	public JTextField getUserEnter() {
+		return userEnter;
+	}
+
+	public void setUserEnter(JTextField userEnter) {
+		CreateAccount.userEnter = userEnter;
+	}
+
+	public JTextField getPassEnter() {
+		return passEnter;
+	}
+
+	public void setPassEnter(JTextField passEnter) {
+		CreateAccount.passEnter = passEnter;
+	}
+
+	public JLabel getLabel() {
+		return label;
+	}
+
+	public void setLabel(JLabel label) {
+		CreateAccount.label = label;
+	}
+
+	public JButton getCreateButton() {
+		return createButton;
+	}
+
+	public void setCreateButton(JButton createButton) {
+		CreateAccount.createButton = createButton;
+	}
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		CreateAccount.file = file;
 	}
 }
