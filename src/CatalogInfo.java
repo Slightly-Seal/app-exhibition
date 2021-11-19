@@ -4,6 +4,7 @@
 * @author James Martin
 */
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -46,6 +47,7 @@ public class CatalogInfo {
 		
 		panel = new JPanel();
 		panel.setLayout(new BorderLayout());
+		panel.setBackground(new Color(102, 178, 255));
 		try {
 			scanner = new Scanner(new File("Catalog.txt"));
 		} catch (FileNotFoundException e1) {

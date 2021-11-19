@@ -5,6 +5,7 @@
 * @author Dakota Henderson
 * @author James Martin
 */
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -49,6 +50,8 @@ public class CreateAccount implements ActionListener{
 		createButton.addActionListener(this);
 		createButton.setSize(100, 50);
 		frame.setSize(400, 200);
+		panel.setBackground(new Color(102, 178, 255));
+		createButton.setBackground(new Color(255, 255, 255));
 		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		file = new File("Login.txt");
 		if (!file.exists()) {
