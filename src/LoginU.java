@@ -22,18 +22,16 @@ import javax.swing.JTextField;
 */
 public class LoginU implements ActionListener{
 	
-	//Frame + Panel
-	JFrame frame;
-	JPanel panel;
+	// Instance variables.
+	public static JFrame frame;
+	public static JPanel panel;
+	public static JTextField userEnter;
+	public static JTextField passEnter;
+	public static JLabel label;
+	public static JButton logButton;
+	public static File file;
 	
-	//Variables
-	JTextField userEnter;
-	JTextField passEnter;
-	JLabel label;
-	JButton logButton;
-	File file;
-	
-	public Framework frames;
+	public static Framework frames;
 	
 	/**
 	 * Constructor for LoginU. Sets up all visual elements
@@ -78,57 +76,95 @@ public class LoginU implements ActionListener{
 	
 	/**
 	* Override from ActionListener.
-	* Scans "Login.txt" to verify that the information the user inputted is 
+	* Scans "Login.txt" to verify that the information the user input is 
 	* from an existing account.
 	* @param Action event e that's used to verify which button is being pressed.
 	*/
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		processLogin();
+	}
+	
+	public void processLogin() {
 		String input = userEnter.getText() + "\\" + passEnter.getText();
-		//System.out.println(input);
-		
 		Scanner scanner = null;
-		
 		String userTry = input.substring(0, input.indexOf("\\"));
 		String passTry = input.substring(input.indexOf("\\") + 1);
-
-		
 		try {
 			scanner = new Scanner(new File("Login.txt"));
-		} catch (FileNotFoundException e1) {
-			System.out.print("Cannot Access Username/Passwords");
+		} catch (FileNotFoundException e) {
+			System.out.print("File not found.");
 		}
 		while (scanner.hasNextLine()) {
 		   String line = scanner.nextLine();
-		   //System.out.println(line.substring(0, line.indexOf("\\")).equals(userTry));
-		   //System.out.println(line.substring(line.indexOf("\\") + 1).equals(passTry));
-		   
 		   if (line.substring(0, line.indexOf("\\")).equals(userTry)) {
-				// if pass matches login file line
 				if (line.substring(line.indexOf("\\") + 1, line.indexOf("\"")).equals(passTry)) {
-					label.setText("Logged in successfully! Welcome.");
+					label.setText("Login successful! Welcome.");
 					if(line.substring(line.indexOf("\"") +1).equals("True")) {
 						frames.isAdmin = true;
-					}
-					else {
+					} else {
 						frames.isAdmin = false;
 					}
 					frames.isLoggedOn = true;
 					frames.LoginButton();
 					frame.setVisible(false);
-				}
-				else {
+				} else {
 					passEnter.setText("");
-					label.setText("Given password does not match what is on file");
+					label.setText("Password not found.");
 				}
-			}
-		   else {
+			} else {
 				userEnter.setText("");
 				passEnter.setText("");
-				label.setText("No account with such username");
+				label.setText("Username not found.");
 		   }
 		}
-		
-		
+	}
+	
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		LoginU.frame = frame;
+	}
+
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	public void setPanel(JPanel panel) {
+		LoginU.panel = panel;
+	}
+
+	public JTextField getUserEnter() {
+		return userEnter;
+	}
+
+	public void setUserEnter(JTextField userEnter) {
+		LoginU.userEnter = userEnter;
+	}
+
+	public JTextField getPassEnter() {
+		return passEnter;
+	}
+
+	public void setPassEnter(JTextField passEnter) {
+		LoginU.passEnter = passEnter;
+	}
+
+	public JLabel getLabel() {
+		return label;
+	}
+
+	public void setLabel(JLabel label) {
+		LoginU.label = label;
+	}
+
+	public JButton getLogButton() {
+		return logButton;
+	}
+
+	public void setLogButton(JButton logButton) {
+		LoginU.logButton = logButton;
 	}
 }
